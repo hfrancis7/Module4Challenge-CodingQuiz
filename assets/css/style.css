@@ -1,0 +1,38 @@
+/*variable*/
+:root{
+    --lavender: rgb(230,230,250);
+    --purple1: #76479c;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* Centering content */
+.center-container {
+    margin: auto;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+  }
+
+/* for the view score and timer on top */
+.pseudo-navbar{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* for the View Score link. Flex align left */
+.top-left {
+    flex: 50%; 
+}
+
+/* for the Timer. Flex align right */
+.top-right {
+    flex: 50%;
+    text-align: right;
+}
+  
+ 
