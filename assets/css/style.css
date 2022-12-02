@@ -34,5 +34,9 @@
     flex: 50%;
     text-align: right;
 }
+
+.border-box{
+    border: 2px solid black;
+}
   
  
