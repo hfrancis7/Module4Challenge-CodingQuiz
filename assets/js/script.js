@@ -3,11 +3,54 @@
  * Last Edited: 12/1/22
  */
 
-var introEls = $("#intro").children();
-var startButton = $("#start-button");
-var timerEl = $("#timer");
-var questionForm = $("#question-form");
+//going to make questions object constants for now
+//would be cleaner to have these object constants saved in a seperate file, may do that in the future if possible
+//Theoretically could store the options in an array and have the correct answer's index be saved. I believe this may have problems with the buttons, may try to execute in future
+const q0 = {
+    question: "This is a test question",
+    o1: "This is choice 1. It is wrong.",
+    o2: "This is choice 2. It is wrong.",
+    o3: "This is choice 3. It is right.",
+    o4: "This is choice 4. It is wrong.",
+    answer: "o3",
+  };
 
+  const q1 = {
+    question: "What's a string",
+    o1: "It's yarn",
+    o2: "It's code",
+    o3: "It's spaghetti",
+    o4: "It's not real",
+    answer: "o2",
+  };
+
+  const q2 = {
+    question: "What is my favorite color",
+    o1: "Purple",
+    o2: "Red",
+    o3: "Blue",
+    o4: "Green",
+    answer: "o1",
+  };
+
+const q_Bank =[q0, q1, q2]; //array of question objects
+const lastIndex = q_Bank.length - 1;
+
+highScore_Storage = window.localStorage;
+
+var questionIndex = 0; //index of the current question, globally scoped for easy access between functions
+var curQuestion = "";
+
+var introEls = $("#intro").children(); //Elements displayed before the quiz starts
+var startButton = $("#start-button"); //Button to start the quiz
+var timerEl = $("#timer"); //timer display
+var questionForm = $("#question-form"); //form that holds all of the elements for the questions to be displayed
+var questionDisplay = $(".question-display"); //class used to toggle showing and hiding the form
+var quizCompleteDisplay = $(".quizComplete-display");
+var highScoresDisplay = $(".highScores-display");
+var timeInterval = "";
+
+//different answer choices
 var option1 = $("#option1");
 var option2 = $("#option2");
 var option3 = $("#option3");
@@ -17,27 +60,30 @@ var option4 = $("#option4");
 var timeLeft = 300; //starting with 300s (5min), README didn't specify time limit
 
 /**
- * Description: Function to start quiz
- * param: N/A
- * return: N/A
+ * @function_name startQuiz
+ * @description 
+ * Displays the first question and starts the timer
+ * @param N/A
+ * @return N/A
  */
 function startQuiz(){
     startTimer();
-    introEls.toggle();
-    displayQuestion();
-    //display a question and its options
-    //once question is answered, move on to next question
-        //if question is wrong, subtract from timer
+    introEls.hide();
+    questionDisplay.show();
+    displayQuestion(questionIndex);
 }
 
 /**
- * Description: Starts the timer for the quiz. Uses setInterval function
- * Param: N/A
- * return: N/A
+ * @function_name startTimer
+ * @description 
+ * Starts the timer for the quiz. Uses setInterval function
+ * @param N/A
+ * @return N/A
  */
 function startTimer(){
     var timeString = "Timer: " + timeLeft;
-    var timeInterval = setInterval(function(){
+    timerEl.text(timeString);
+    timeInterval = setInterval(function(){
         timeString = "Timer: " + timeLeft;
         timerEl.text(timeString);
         timeLeft--;
@@ -48,58 +94,113 @@ function startTimer(){
     }, 1000);
 }
 
+function quizComplete(){
+    clearInterval(timeInterval);
+    console.log("Your score was: " + timeLeft);
+    $("#your-score.was").replaceWith("<h3 id=\"your-score-was\">Your Score was " + timeLeft + "!</h3>");
+    quizCompleteDisplay.toggle();
+    $("#submit-score").on("click", submitScore);
+}
+
+function submitScore(){
+    var curInitials = $("#initials").val();
+    highScore_Storage.setItem(curInitials, timeLeft);
+}
+
 /**
- * Description: Should reduce timeLeft by 10 without displaying negative numbers
- * Param: N/A
- * return: N/A
- * note: haven't tested yet
+ * @description 
+ * This function is in charge of displaying the question and answer choices to the user.
+ * @param {int} index
+ * @return N/A 
  */
-function incorrect(){
-    console.log("incorrect function begin execute");
+function displayQuestion(index){
+    // saves info about current question. Possible dryer way to create with for loop
+    curQuestion = q_Bank[index];
+    var question = curQuestion.question;
+    var o1 = curQuestion.o1;
+    var o2 = curQuestion.o2;
+    var o3 = curQuestion.o3;
+    var o4 = curQuestion.o4;
+
+    questionForm.append("<h3>" + question + "</h3>");
+    questionForm.append("<button type=\"button\" id=\"option1\">" + o1 + "</button>");
+    questionForm.append("<button type=\"button\" id=\"option2\">" + o2 + "</button>");
+    questionForm.append("<button type=\"button\" id=\"option3\">" + o3 + "</button>");
+    questionForm.append("<button type=\"button\" id=\"option4\">" + o4 + "</button>");
+
+}
+
+/**
+ * @description takes the current question object and compares the user's button input answer to the question's correct answer
+ * @param {object} curQuestion 
+ * @param {string} answer 
+ */
+function checkAnswer(curQuestion, answer){
+    if(answer != curQuestion.answer){
+        console.log("answer incorrect");
+        incorrect(); //reduces time
+        displayMessage("Incorrect!");
+    }else{
+        displayMessage("Correct!");
+    }
+    questionForm.children().remove(); //removes current question/answers from form for next question
+    console.log(questionIndex + " " + lastIndex);
+    if(questionIndex < lastIndex){
+        questionIndex += 1;
+        displayQuestion(questionIndex);
+    }else{
+        console.log("All questions answered");
+        questionDisplay.hide();
+        quizComplete();
+    }
+}
+
+/**
+ * @description 
+ * Should reduce timeLeft by 10 without displaying negative numbers
+ * Updates display timer b/c timer only updates every second in timer's interval
+ * @param N/A
+ * @return N/A
+ */
+ function incorrect(){
     if(timeLeft > 10){
-        timeLeft = timeLeft - 10;
+        timeLeft -= 10;
     }else{
         timeLeft = 0;
     }
-    console.log("incorrect function end execute");
+    var timeString = "Timer: " + timeLeft;
+    timerEl.text(timeString);
 }
 
-function displayQuestion(){
-    //questions will likely be displayed in the same order every time. 
-    //If randomizing the order is trivial, might change
-    //for each loop TODO
-        var question = q0.question;
-        var o1 = q0.c1;
-        var o2 = q0.c2;
-        var o3 = q0.c3;
-        var o4 = q0.c4;
-        var answer = q0.answer;
-
-        questionForm.append("<h3>" + question + "</h3>");
-        questionForm.append("<button type=\"button\" id=\"option1\">" + o1 + "</button>");
-        questionForm.append("<button type=\"button\" id=\"option2\">" + o2 + "</button>");
-        questionForm.append("<button type=\"button\" id=\"option3\">" + o3 + "</button>");
-        questionForm.append("<button type=\"button\" id=\"option4\">" + o4 + "</button>");
-
-}
-
-function checkAnswer(){
+/**
+ * @description
+ * Displays whether the user's previous answer was correct or incorrect.
+ * Message will disapear after a few seconds.
+ * @param {string} message 
+ */
+function displayMessage(message){
+    $("#answer").replaceWith("<p id=\"answer\">" + message + "</p>");
+    //Makes the message appear for one second
+    var msgInterval = setInterval(function(){
+        clearInterval(msgInterval);
+        $("#answer").replaceWith("<p id=\"answer\"></p>");
+    }, 1000);
     
 }
 
-
+// BUTTONS
 startButton.on("click", startQuiz);
-option1.on("click", incorrect);
+//wrapped in an anonymous function since jQuery only handles function references (can't input parameters)
+questionForm.on('click', '#option1', function(event){
+    checkAnswer(curQuestion, "o1");
+})
+questionForm.on('click', '#option2', function(event){
+    checkAnswer(curQuestion, "o2");
+})
+questionForm.on('click', '#option3', function(event){
+    checkAnswer(curQuestion, "o3");
+})
+questionForm.on('click', '#option4', function(event){
+    checkAnswer(curQuestion, "o4");
+})
 
-
-//going to make questions object constants for now
-const q0 = {
-    question: "This is a test question",
-    c1: "This is choice 1. It is wrong.",
-    c2: "This is choice 2. It is wrong.",
-    c3: "This is choice 3. It is right.",
-    c4: "This is choice 4. It is wrong.",
-    answer: "c3",
-  };
-
-const q_Bank =[q0];

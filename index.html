@@ -25,11 +25,29 @@
     </header>
 
     <main>
-        <section>
-            <form class="border-box" id="question-form">
-                
+        <!-- Display Question -->
+        <section class="center-container question-display display-answer">
+            <form id="question-form"></form>
+            <p id="answer"></p>
+        </section>
+        
+        <!-- Quiz Finished -->
+        <section class="center-container quizComplete-display quiz-complete">
+            
+            <h2>All Done!</h2>
+            <h3 id="your-score-was">Your Score was ___!</h3>
+            <h3>Save your high score:</h3>
+            <form id="enter-highscore">
+                <label for="initials">Your Initials: </label>
+                <input type="text" id="initals" name="initials"><br>
+                <input type="button" id="submit-score">
             </form>
         </section>
+
+        <!-- Show high scores -->
+        <section class="center-container highScores-display high-scores"></section>
+
+
     </main>
 
     <!-- <footer class="center-container">
