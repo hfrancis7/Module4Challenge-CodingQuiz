@@ -1,6 +1,6 @@
 /**
  * Author: Hailey D. Francis (hfran7@yahoo.com)
- * Last Edited: 12/1/22
+ * Last Edited: 12/4/22
  */
 
 //going to make questions object constants for now
@@ -48,7 +48,7 @@ var questionForm = $("#question-form"); //form that holds all of the elements fo
 var questionDisplay = $(".question-display"); //class used to toggle showing and hiding the form
 var quizCompleteDisplay = $(".quizComplete-display");
 var highScoresDisplay = $(".highScores-display");
-var viewScores = $("#view-scores");
+var viewScoresLink = $("#view-scores");
 
 var timeInterval = "";
 
@@ -71,7 +71,7 @@ var timeLeft = 200; //starting with 300s (5min), README didn't specify time limi
 function startQuiz(){
     startTimer();
     introEls.hide();
-    viewScores.hide();
+    viewScoresLink.hide();
     questionDisplay.show();
     displayQuestion(questionIndex);
 }
@@ -180,7 +180,7 @@ function displayMessage(message){
 function quizComplete(){
     clearInterval(timeInterval);
     timerEl.text("");
-    viewScores.show();
+    viewScoresLink.show();
     questionIndex = 0;
     console.log("Your score was: " + timeLeft);
     $("#your-score-was").replaceWith("<h3 id=\"your-score-was\">Your Score was " + timeLeft + "!</h3>");
@@ -194,6 +194,24 @@ function submitScore(){
     quizCompleteDisplay.hide();
     $("#initials").val("");
     introEls.show();
+}
+
+function viewScores(){
+    introEls.hide();
+    quizCompleteDisplay.hide();
+    Object.keys(highScore_Storage).forEach((key) => {
+        console.log(highScore_Storage.getItem(key));
+       });
+    highScoresDisplay.show();
+}
+
+function goBack(){
+    highScoresDisplay.hide();
+    introEls.show();
+}
+
+function clearScores(){
+    highScore_Storage.clear();
 }
 
 // BUTTONS
@@ -211,4 +229,10 @@ questionForm.on('click', '#option3', function(event){
 questionForm.on('click', '#option4', function(event){
     checkAnswer(curQuestion, "o4");
 })
+
+//LINK
+viewScoresLink.click(viewScores);
+$("#go-back").click(goBack);
+$("#clear-scores").click(clearScores);
+
 
