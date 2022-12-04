@@ -48,6 +48,8 @@ var questionForm = $("#question-form"); //form that holds all of the elements fo
 var questionDisplay = $(".question-display"); //class used to toggle showing and hiding the form
 var quizCompleteDisplay = $(".quizComplete-display");
 var highScoresDisplay = $(".highScores-display");
+var viewScores = $("#view-scores");
+
 var timeInterval = "";
 
 //different answer choices
@@ -57,7 +59,7 @@ var option3 = $("#option3");
 var option4 = $("#option4");
 
 //timeLeft is outside of timer function so that it can be reduced in other functions (primarily when a question is answered incorrectly)
-var timeLeft = 300; //starting with 300s (5min), README didn't specify time limit
+var timeLeft = 200; //starting with 300s (5min), README didn't specify time limit
 
 /**
  * @function_name startQuiz
@@ -69,6 +71,7 @@ var timeLeft = 300; //starting with 300s (5min), README didn't specify time limi
 function startQuiz(){
     startTimer();
     introEls.hide();
+    viewScores.hide();
     questionDisplay.show();
     displayQuestion(questionIndex);
 }
@@ -81,8 +84,7 @@ function startQuiz(){
  * @return N/A
  */
 function startTimer(){
-    var timeString = "Timer: " + timeLeft;
-    timerEl.text(timeString);
+    timeLeft = 200;
     timeInterval = setInterval(function(){
         timeString = "Timer: " + timeLeft;
         timerEl.text(timeString);
@@ -92,19 +94,6 @@ function startTimer(){
         }
 
     }, 1000);
-}
-
-function quizComplete(){
-    clearInterval(timeInterval);
-    console.log("Your score was: " + timeLeft);
-    $("#your-score.was").replaceWith("<h3 id=\"your-score-was\">Your Score was " + timeLeft + "!</h3>");
-    quizCompleteDisplay.toggle();
-    $("#submit-score").on("click", submitScore);
-}
-
-function submitScore(){
-    var curInitials = $("#initials").val();
-    highScore_Storage.setItem(curInitials, timeLeft);
 }
 
 /**
@@ -186,6 +175,25 @@ function displayMessage(message){
         $("#answer").replaceWith("<p id=\"answer\"></p>");
     }, 1000);
     
+}
+
+function quizComplete(){
+    clearInterval(timeInterval);
+    timerEl.text("");
+    viewScores.show();
+    questionIndex = 0;
+    console.log("Your score was: " + timeLeft);
+    $("#your-score-was").replaceWith("<h3 id=\"your-score-was\">Your Score was " + timeLeft + "!</h3>");
+    quizCompleteDisplay.show();
+    $("#submit-score").click(submitScore);
+}
+
+function submitScore(){
+    var curInitials = $("#initials").val();
+    highScore_Storage.setItem(curInitials, timeLeft);
+    quizCompleteDisplay.hide();
+    $("#initials").val("");
+    introEls.show();
 }
 
 // BUTTONS
