@@ -88,10 +88,11 @@ function startTimer(){
     timeInterval = setInterval(function(){
         timeString = "Timer: " + timeLeft;
         timerEl.text(timeString);
-        timeLeft--;
         if(timeLeft <= 0){
-            clearInterval(timeInterval);
+            quizComplete();
         }
+        timeLeft--;
+        
 
     }, 1000);
 }
@@ -126,19 +127,16 @@ function displayQuestion(index){
  */
 function checkAnswer(curQuestion, answer){
     if(answer != curQuestion.answer){
-        console.log("answer incorrect");
         incorrect(); //reduces time
         displayMessage("Incorrect!");
     }else{
         displayMessage("Correct!");
     }
     questionForm.children().remove(); //removes current question/answers from form for next question
-    console.log(questionIndex + " " + lastIndex);
-    if(questionIndex < lastIndex){
+    if((questionIndex < lastIndex) && timeLeft > 0){
         questionIndex += 1;
         displayQuestion(questionIndex);
     }else{
-        console.log("All questions answered");
         questionDisplay.hide();
         quizComplete();
     }
@@ -152,11 +150,7 @@ function checkAnswer(curQuestion, answer){
  * @return N/A
  */
  function incorrect(){
-    if(timeLeft > 10){
-        timeLeft -= 10;
-    }else{
-        timeLeft = 0;
-    }
+    timeLeft -= 10;
     var timeString = "Timer: " + timeLeft;
     timerEl.text(timeString);
 }
@@ -178,19 +172,21 @@ function displayMessage(message){
 }
 
 function quizComplete(){
+    questionDisplay.hide();
+    questionForm.children().remove();
+    questionIndex = 0;
     clearInterval(timeInterval);
     timerEl.text("");
     viewScoresLink.show();
     questionIndex = 0;
-    console.log("Your score was: " + timeLeft);
     $("#your-score-was").replaceWith("<h3 id=\"your-score-was\">Your Score was " + timeLeft + "!</h3>");
     quizCompleteDisplay.show();
-    $("#submit-score").click(submitScore);
 }
 
 function submitScore(){
     var curInitials = $("#initials").val();
-    highScore_Storage.setItem(curInitials, timeLeft);
+    var value = curInitials + ": " + timeLeft;
+    highScore_Storage.setItem(curInitials, value);
     quizCompleteDisplay.hide();
     $("#initials").val("");
     introEls.show();
@@ -199,19 +195,23 @@ function submitScore(){
 function viewScores(){
     introEls.hide();
     quizCompleteDisplay.hide();
+    $("#high-score-list").children().remove();
     Object.keys(highScore_Storage).forEach((key) => {
-        console.log(highScore_Storage.getItem(key));
+        var score = highScore_Storage.getItem(key);
+        $("#high-score-list").append("<li>" + score + "</l1>");
        });
     highScoresDisplay.show();
 }
 
 function goBack(){
     highScoresDisplay.hide();
+    $("#high-score-list").children().remove();
     introEls.show();
 }
 
 function clearScores(){
     highScore_Storage.clear();
+    $("#high-score-list").children().remove()
 }
 
 // BUTTONS
@@ -234,5 +234,6 @@ questionForm.on('click', '#option4', function(event){
 viewScoresLink.click(viewScores);
 $("#go-back").click(goBack);
 $("#clear-scores").click(clearScores);
+$("#submit-score").click(submitScore);
 
 
