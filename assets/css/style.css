@@ -10,31 +10,52 @@ html {
     box-sizing: border-box;
 }
 
+/* Attempting to size footer so that is doesn't overlap when height gets too small */
 *,
 *:before,
 *:after {
   box-sizing: inherit;
 }
 
+ /* Attempting to size footer so that is doesn't overlap when height gets too small */
 * {
     padding: 0;
     margin: 0;
     line-height: 1.5em;
 }
 
+/* Attempting to size footer so that is doesn't overlap when height gets too small */
 body{
     position: relative;
-    margin: 0;
     padding-bottom: 6rem;
     min-height: 100%;
 }
 
+/* hovering over both internal and external links turns text light blue */
 a:hover, #view-scores:hover{
     color: lightblue;
 }
 
+/* Attempting to size footer so that is doesn't overlap when height gets too small */
+#foot{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* polka dot background */
 #background{
     background-image: url("../images/polkadot.jpg")
+}
+
+/* making everything in header and footer text white and Lucidia */
+#timer, #view-scores, #foot, a{
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    
 }
 
 /* Centering content */
@@ -51,18 +72,13 @@ a:hover, #view-scores:hover{
     padding: 30px;
 }
 
-/* for the View Score link. Flex align left */
-.top-left {
-    flex: 50%; 
-}
-
 /* for the Timer. Flex align right */
 .top-center {
     flex: 50%;
     text-align: center;
 }
 
-/* start off with no display to toggle later */
+/* start off with no display to toggle later. Question Display */
 .question-display{
     display: none;
     border: 5px solid var(--purple1);
@@ -73,14 +89,17 @@ a:hover, #view-scores:hover{
     padding: 10px; 
 }
 
+/* start off with no display to toggle later. Quiz Complete Display */
 .quizComplete-display{
     display: none;
 }
 
+/* start off with no display to toggle later. High Score display*/
 .highScores-display{
     display: none;
 }
 
+/* cat image */
 .cat{
     display: block;
     margin-left: auto;
@@ -89,14 +108,7 @@ a:hover, #view-scores:hover{
 
 }
 
-#timer, #view-scores, #foot, a{
-    color:white;
-    font-size: 20px;
-    font-weight: bold;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-    
-}
-
+/* button styling */
 .button{
     background-color: var(--purple1);
     color:white;
@@ -107,6 +119,7 @@ a:hover, #view-scores:hover{
     font-weight: bold;
 }
 
+/*button changes color when hovering over */
 .button:hover{
     background-color: greenyellow;
     color: black;
@@ -114,15 +127,9 @@ a:hover, #view-scores:hover{
     
 }
 
+/* flex column (used in footer) */
 .flex-col{
     flex-direction: column;
-}
-
-#foot{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
 }
   
  
