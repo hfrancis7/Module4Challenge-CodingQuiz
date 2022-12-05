@@ -128,8 +128,10 @@ function displayQuestion(index){
 function checkAnswer(curQuestion, answer){
     if(answer != curQuestion.answer){
         incorrect(); //reduces time
+        $(".cat").replaceWith("<img src=\"./assets/images/cat_incorrect.png\" class=\"cat\"></img>");
         displayMessage("Incorrect!");
     }else{
+        $(".cat").replaceWith("<img src=\"./assets/images/cat_correct.png\" class=\"cat\"></img>");
         displayMessage("Correct!");
     }
     questionForm.children().remove(); //removes current question/answers from form for next question
@@ -167,6 +169,7 @@ function displayMessage(message){
     var msgInterval = setInterval(function(){
         clearInterval(msgInterval);
         $("#answer").replaceWith("<p id=\"answer\"></p>");
+        $(".cat").replaceWith("<img src=\"./assets/images/cat_neutral.png\" class=\"cat\"></img>");
     }, 1000);
     
 }
