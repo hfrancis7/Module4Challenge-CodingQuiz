@@ -7,33 +7,60 @@
 //would be cleaner to have these object constants saved in a seperate file, may do that in the future if possible
 //Theoretically could store the options in an array and have the correct answer's index be saved. I believe this may have problems with the buttons, may try to execute in future
 const q0 = {
-    question: "This is a test question",
-    o1: "This is choice 1. It is wrong.",
-    o2: "This is choice 2. It is wrong.",
-    o3: "This is choice 3. It is right.",
-    o4: "This is choice 4. It is wrong.",
+    question: "How do you have a link in your html open a new browser window?",
+    o1: "target=\"_new\"",
+    o2: "blank=\"_open\"",
+    o3: "target=\"_blank\"",
+    o4: "open=\"_blank\"",
     answer: "o3",
   };
 
   const q1 = {
-    question: "What's a string",
-    o1: "It's yarn",
-    o2: "It's code",
-    o3: "It's spaghetti",
-    o4: "It's not real",
+    question: "What does HTML stand for?",
+    o1: "Hyperlinks and Text Markup Language",
+    o2: "Hypertext Markup Language",
+    o3: "Home Tool Markup Language",
+    o4: "Hyper tool Markup Language",
     answer: "o2",
   };
 
   const q2 = {
-    question: "What is my favorite color",
-    o1: "Purple",
-    o2: "Red",
-    o3: "Blue",
-    o4: "Green",
+    question: "What does CSS stand for?",
+    o1: "Cascading Style Sheets",
+    o2: "Coding Style Sheets",
+    o3: "Cascading Sheet Styles",
+    o4: "Coding Sheet Styles",
     answer: "o1",
   };
 
-const q_Bank =[q0, q1, q2]; //array of question objects
+  const q3 = {
+    question: "Commonly used data types DO NOT include:",
+    o1: "strings",
+    o2: "booleans",
+    o3: "integers",
+    o4: "assets",
+    answer: "o4",
+  };
+
+  const q4 = {
+    question: "The condition in an if/else statement is enclosed within ____.",
+    o1: "\"quotes\"",
+    o2: "{curly brackets}",
+    o3: "(parentheses)",
+    o4: "[square brackets]",
+    answer: "o3",
+  };
+
+  const q5 = {
+    question: "Arrays in JavaScript can be used to store which of the following?",
+    o1: "numbers and strings",
+    o2: "booleans",
+    o3: "other arrays",
+    o4: "all of the above",
+    answer: "o4",
+  };
+
+const q_Bank =[q0, q1, q2, q3, q4, q5]; //array of question objects
 const lastIndex = q_Bank.length - 1;
 
 highScore_Storage = window.localStorage;
@@ -84,6 +111,7 @@ function startQuiz(){
  * @return N/A
  */
 function startTimer(){
+    timerEl.text("Timer:");
     timeLeft = 200;
     timeInterval = setInterval(function(){
         timeString = "Timer: " + timeLeft;
@@ -113,10 +141,10 @@ function displayQuestion(index){
     var o4 = curQuestion.o4;
 
     questionForm.append("<h3>" + question + "</h3>");
-    questionForm.append("<button type=\"button\" id=\"option1\">" + o1 + "</button>");
-    questionForm.append("<button type=\"button\" id=\"option2\">" + o2 + "</button>");
-    questionForm.append("<button type=\"button\" id=\"option3\">" + o3 + "</button>");
-    questionForm.append("<button type=\"button\" id=\"option4\">" + o4 + "</button>");
+    questionForm.append("<button class=\"button\" type=\"button\" id=\"option1\">" + o1 + "</button><br>");
+    questionForm.append("<button class=\"button\" type=\"button\" id=\"option2\">" + o2 + "</button><br>");
+    questionForm.append("<button class=\"button\" type=\"button\" id=\"option3\">" + o3 + "</button><br>");
+    questionForm.append("<button class=\"button\" type=\"button\" id=\"option4\">" + o4 + "</button><br>");
 
 }
 

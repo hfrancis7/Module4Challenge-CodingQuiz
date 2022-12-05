@@ -2,12 +2,17 @@
 :root{
     --lavender: rgb(230,230,250);
     --purple1: #76479c;
+    --pruple2: 
 }
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+}
+
+#background{
+    background-image: url("../images/polkadot.jpg")
 }
 
 /* Centering content */
@@ -21,6 +26,8 @@
 .pseudo-navbar{
     display: flex;
     flex-wrap: wrap;
+    background-color: var(--purple1);
+    padding: 30px;
 }
 
 /* for the View Score link. Flex align left */
@@ -29,14 +36,20 @@
 }
 
 /* for the Timer. Flex align right */
-.top-right {
+.top-center {
     flex: 50%;
-    text-align: right;
+    text-align: center;
 }
 
 /* start off with no display to toggle later */
 .question-display{
     display: none;
+    border: 5px solid var(--purple1);
+    background-color: var(--lavender);
+    border-radius: 15px;
+    margin-top: 50px;
+    width: 50%;
+    padding: 10px; 
 }
 
 .quizComplete-display{
@@ -51,16 +64,32 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 25%;
+    max-width: 400px;
 
 }
 
-/* need to implement solution to border appearing with no elements */
- #question-form{
-    border: 2px solid black;
-    margin: auto;
-    width: 50%;
-    padding: 10px; 
+#timer, #view-scores{
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    
+}
+
+.button{
+    background-color: var(--purple1);
+    color:white;
+    border: 1px solid var(--lavender);
+    border-radius: 7px;
+    padding: 7px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button:hover{
+    background-color: greenyellow;
+    color: black;
+    border: 1px solid black;
     
 }
   
