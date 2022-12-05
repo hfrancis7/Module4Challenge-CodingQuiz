@@ -36,6 +36,7 @@ a:hover, #view-scores:hover{
     color: lightblue;
 }
 
+/* because there is only one list (high scores) just using ul tag */
 ul{
     margin-left: 25%;
     margin-right: 25%;
@@ -43,10 +44,12 @@ ul{
     border-radius: 7px;
 }
 
+/* making every odd color lavender */
 ul > li:nth-of-type(odd) {
     background-color: var(--lavender);
 }
 
+/* making every even color white */
 ul > li:nth-of-type(even) {
     background-color: white;
 }
@@ -84,6 +87,7 @@ ul > li:nth-of-type(even) {
     display: flex;
     background-color: var(--purple1);
     padding: 30px;
+    width: 100%;
 }
 
 /* for the Timer. Flex align right */
@@ -99,7 +103,7 @@ ul > li:nth-of-type(even) {
     background-color: var(--lavender);
     border-radius: 15px;
     margin-top: 50px;
-    width: 50%;
+    width: 90%;
     padding: 10px; 
     text-align: left;
     font-size: 25px;
@@ -148,6 +152,17 @@ ul > li:nth-of-type(even) {
 /* flex column (used in footer) */
 .flex-col{
     flex-direction: column;
+}
+
+
+@media screen and (max-width: 650px){
+    *, .button{
+        font-size: 15px;
+    }
+
+    .cat{
+        max-width: 200px;
+    }
 }
   
  
