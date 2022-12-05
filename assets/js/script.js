@@ -249,7 +249,7 @@ function submitScore(){
                 }
             }
         })
-        if(!replace){
+        if(!keyFound){
             var value = curInitials + ": " + timeLeft;
             highScore_Storage.setItem(curInitials, value);
             quizCompleteDisplay.hide();
@@ -282,9 +282,11 @@ function viewScores(){
 /**
  * @description
  * hides high score elements, clears li elements and displays intro elements again.
+ * Also used to go back to main screen from Quiz Complete display
  */
 function goBack(){
     highScoresDisplay.hide();
+    quizCompleteDisplay.hide();
     $("#high-score-list").children().remove();
     $(".cat").replaceWith("<img src=\"./assets/images/cat_neutral.png\" class=\"cat\"></img>");
     introEls.show();
@@ -321,6 +323,7 @@ questionForm.on('click', '#option4', function(event){
 // LINK
 viewScoresLink.click(viewScores);
 $("#go-back").click(goBack);
+$("#go-back2").click(goBack);
 
 
 
