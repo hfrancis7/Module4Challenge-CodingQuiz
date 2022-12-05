@@ -170,7 +170,7 @@ function displayMessage(message){
         clearInterval(msgInterval);
         $("#answer").replaceWith("<p id=\"answer\"></p>");
         $(".cat").replaceWith("<img src=\"./assets/images/cat_neutral.png\" class=\"cat\"></img>");
-    }, 1000);
+    }, 750);
     
 }
 
@@ -199,6 +199,7 @@ function viewScores(){
     introEls.hide();
     quizCompleteDisplay.hide();
     $("#high-score-list").children().remove();
+    $(".cat").replaceWith("<img src=\"./assets/images/cat_celebrate.png\" class=\"cat\"></img>");
     Object.keys(highScore_Storage).forEach((key) => {
         var score = highScore_Storage.getItem(key);
         $("#high-score-list").append("<li>" + score + "</l1>");
@@ -209,6 +210,7 @@ function viewScores(){
 function goBack(){
     highScoresDisplay.hide();
     $("#high-score-list").children().remove();
+    $(".cat").replaceWith("<img src=\"./assets/images/cat_neutral.png\" class=\"cat\"></img>");
     introEls.show();
 }
 
