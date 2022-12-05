@@ -1,11 +1,9 @@
 /**
  * Author: Hailey D. Francis (hfran7@yahoo.com)
- * Last Edited: 12/4/22
+ * Last Edited: 12/5/22
  */
 
-//going to make questions object constants for now
-//would be cleaner to have these object constants saved in a seperate file, may do that in the future if possible
-//Theoretically could store the options in an array and have the correct answer's index be saved. I believe this may have problems with the buttons, may try to execute in future
+// QUESTION + ANSWER OBJECT CONSTANTS //
 const q0 = {
     question: "How do you have a link in your html open a new browser window?",
     o1: "target=\"_new\"",
@@ -63,11 +61,14 @@ const q0 = {
 const q_Bank =[q0, q1, q2, q3, q4, q5]; //array of question objects
 const lastIndex = q_Bank.length - 1;
 
-highScore_Storage = window.localStorage;
+// END OF QUESTION + ANSWER OBJECT CONSTANTS //
+
+highScore_Storage = window.localStorage; //local storage
 
 var questionIndex = 0; //index of the current question, globally scoped for easy access between functions
 var curQuestion = "";
 
+// JQUERY VARIABLES //
 var introEls = $("#intro").children(); //Elements displayed before the quiz starts
 var startButton = $("#start-button"); //Button to start the quiz
 var timerEl = $("#timer"); //timer display
@@ -79,7 +80,7 @@ var viewScoresLink = $("#view-scores");
 
 var timeInterval = "";
 
-//different answer choices
+// different answer choices //
 var option1 = $("#option1");
 var option2 = $("#option2");
 var option3 = $("#option3");
@@ -202,27 +203,70 @@ function displayMessage(message){
     
 }
 
+/**
+ * @description
+ * Shows "Quiz complete elements", allows user to input their initials
+ */
 function quizComplete(){
-    questionDisplay.hide();
-    questionForm.children().remove();
-    questionIndex = 0;
-    clearInterval(timeInterval);
-    timerEl.text("");
+    questionDisplay.hide(); //hides the question display
+    questionForm.children().remove(); //clears all elements of question
+    questionIndex = 0; //resets question index list
+    clearInterval(timeInterval); //stops timer
+    timerEl.text(""); //removes timer display
     viewScoresLink.show();
-    questionIndex = 0;
+
+    //shows the user what their score was based on the timer
     $("#your-score-was").replaceWith("<h3 id=\"your-score-was\">Your Score was " + timeLeft + "!</h3>");
     quizCompleteDisplay.show();
 }
 
+/**
+ * @description
+ * Saves score to local storage, if user doesn't enter anything into input box than an alert box appears.
+ * NOTE: There is currently no check to see if the user is entering valid initials. The user can currently enter
+ * however many and whatever kinds of letters/numbers/symbols they wish.
+ */
 function submitScore(){
     var curInitials = $("#initials").val();
-    var value = curInitials + ": " + timeLeft;
-    highScore_Storage.setItem(curInitials, value);
-    quizCompleteDisplay.hide();
     $("#initials").val("");
-    introEls.show();
+    var keyFound = false;
+    
+    //if user has entered nothing
+    if(curInitials == ""){
+        alert("Please input your initials.");
+    }else{
+        //if user already has score saved
+        Object.keys(highScore_Storage).forEach((key) => {
+            if(key == curInitials){
+                keyFound = true;
+                var score = highScore_Storage.getItem(key);
+                let  userAnswer = confirm("You already a score saved. (" + score + ") Are you sure you want to overwrite this score?");
+                if(userAnswer){
+                    var value = curInitials + ": " + timeLeft;
+                    highScore_Storage.setItem(curInitials, value);
+                    quizCompleteDisplay.hide();
+                    introEls.show();
+                }
+            }
+        })
+        if(!replace){
+            var value = curInitials + ": " + timeLeft;
+            highScore_Storage.setItem(curInitials, value);
+            quizCompleteDisplay.hide();
+            introEls.show();
+        }
+        
+
+        
+    }
+    
 }
 
+/**
+ * @description
+ * hides other elements and displays the current high scores from local storage.
+ * re-prints list every time upon pressing "view scores"
+ */
 function viewScores(){
     introEls.hide();
     quizCompleteDisplay.hide();
@@ -235,6 +279,10 @@ function viewScores(){
     highScoresDisplay.show();
 }
 
+/**
+ * @description
+ * hides high score elements, clears li elements and displays intro elements again.
+ */
 function goBack(){
     highScoresDisplay.hide();
     $("#high-score-list").children().remove();
@@ -242,13 +290,20 @@ function goBack(){
     introEls.show();
 }
 
+/**
+ * @description
+ * Clears the high scores from local storage
+ */
 function clearScores(){
     highScore_Storage.clear();
-    $("#high-score-list").children().remove()
+    $("#high-score-list").children().remove();
 }
 
-// BUTTONS
+// BUTTONS //
 startButton.on("click", startQuiz);
+$("#clear-scores").click(clearScores);
+$("#submit-score").click(submitScore);
+
 //wrapped in an anonymous function since jQuery only handles function references (can't input parameters)
 questionForm.on('click', '#option1', function(event){
     checkAnswer(curQuestion, "o1");
@@ -263,10 +318,9 @@ questionForm.on('click', '#option4', function(event){
     checkAnswer(curQuestion, "o4");
 })
 
-//LINK
+// LINK
 viewScoresLink.click(viewScores);
 $("#go-back").click(goBack);
-$("#clear-scores").click(clearScores);
-$("#submit-score").click(submitScore);
+
 
 

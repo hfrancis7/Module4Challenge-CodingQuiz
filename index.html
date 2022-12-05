@@ -35,11 +35,11 @@
             
             <h2>All Done!</h2>
             <h3 id="your-score-was">Your Score was ___!</h3>
-            <h3>Save your high score:</h3>
+            <h3>Save your high score by entering your initials below:</h3>
             <form id="enter-highscore">
                 <label for="initials">Your Initials: </label>
                 <input type="text" id="initials" name="initials"><br>
-                <button type="button" id="submit-score">Submit</button>
+                <button class="button" type="button" id="submit-score">Submit</button>
             </form>
         </section>
 
@@ -47,10 +47,11 @@
         <section class="center-container highScores-display high-scores">
             <h2>High Scores</h2>
             <ul id="high-score-list"></ul>
-            <button type="button" id="go-back">Go Back</button>
-            <button type="button" id="clear-scores">Clear Scores</button>
+            <button class="button" type="button" id="go-back">Go Back</button>
+            <button class="button" type="button" id="clear-scores">Clear Scores</button>
         </section>
 
+        <!-- Cat image and container for displaying "Correct" or "Incorrect" -->
         <section class="center-container">
             <p id="answer"></p>
             <img src="./assets/images/cat_neutral.png" class="cat">
@@ -60,7 +61,7 @@
 
     <footer id="foot" class="center-container flex-col">
         <h3>Hailey D. Francis</h3>
-        <h3>GitHub</h3>
+        <h3><a href="https://github.com/hfrancis7">My GitHub</a></h3>
         <h3><a href="https://picrew.me/image_maker/35494" target="_blank">Picrew Used for Cat</a></h3>
     </footer>
     

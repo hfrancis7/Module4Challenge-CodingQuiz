@@ -5,11 +5,32 @@
     --pruple2: 
 }
 
-* {
+html {
+    height: 100%;
     box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
     padding: 0;
     margin: 0;
     line-height: 1.5em;
+}
+
+body{
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}
+
+a:hover, #view-scores:hover{
+    color: lightblue;
 }
 
 #background{
@@ -26,7 +47,6 @@
 /* for the view score and timer on top */
 .pseudo-navbar, #foot{
     display: flex;
-    flex-wrap: wrap;
     background-color: var(--purple1);
     padding: 30px;
 }
@@ -69,7 +89,7 @@
 
 }
 
-#timer, #view-scores, #foot{
+#timer, #view-scores, #foot, a{
     color:white;
     font-size: 20px;
     font-weight: bold;
@@ -96,6 +116,13 @@
 
 .flex-col{
     flex-direction: column;
+}
+
+#foot{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
   
  
