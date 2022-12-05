@@ -9,6 +9,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    line-height: 1.5em;
 }
 
 #background{
@@ -23,7 +24,7 @@
   }
 
 /* for the view score and timer on top */
-.pseudo-navbar{
+.pseudo-navbar, #foot{
     display: flex;
     flex-wrap: wrap;
     background-color: var(--purple1);
@@ -68,7 +69,7 @@
 
 }
 
-#timer, #view-scores{
+#timer, #view-scores, #foot{
     color:white;
     font-size: 20px;
     font-weight: bold;
@@ -91,6 +92,10 @@
     color: black;
     border: 1px solid black;
     
+}
+
+.flex-col{
+    flex-direction: column;
 }
   
  
