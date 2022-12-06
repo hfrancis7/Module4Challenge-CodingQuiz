@@ -60,10 +60,10 @@ const q0 = {
 
   const q6 = {
     question: "Inside which HTML element do we put the JavaScript?",
-    o1: "<script>",
-    o2: "<js>",
-    o3: "<javascript>",
-    o4: "<scripting>",
+    o1: "script",
+    o2: "js",
+    o3: "javascript",
+    o4: "scripting",
     answer: "o1",
   };
 
