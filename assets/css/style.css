@@ -98,6 +98,8 @@ ul > li:nth-of-type(even) {
     font-family: 'Lucida Handwriting', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+
+/* lavender box around text */
 #intro, .quizComplete-display{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: lavender;
@@ -107,6 +109,7 @@ ul > li:nth-of-type(even) {
     border: 7px solid var(--purple1);
     border-radius: 7px;
     text-align: center;
+    padding: 10px;
 
 }
 
@@ -142,7 +145,7 @@ ul > li:nth-of-type(even) {
     width: 90%;
     padding: 10px; 
     text-align: left;
-    font-size: 25px;
+    font-size: 30px;
     font-family:'Times New Roman', Times, serif;
 }
 
@@ -196,13 +199,29 @@ ul > li:nth-of-type(even) {
         font-size: 15px;
     }
 
-    #view-scores{
+    h1{
+        font-size: 28px;
 
     }
+
+    h2{
+        font-size: 21px;
+    }
+    h3{
+        font-size: 17px;
+    }
+
+    #intro, .quizComplete-display{
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    
 
     .cat{
         max-width: 200px;
     }
 }
+    
   
  

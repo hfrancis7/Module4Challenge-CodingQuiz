@@ -58,7 +58,47 @@ const q0 = {
     answer: "o4",
   };
 
-const q_Bank =[q0, q1, q2, q3, q4, q5]; //array of question objects
+  const q6 = {
+    question: "Inside which HTML element do we put the JavaScript?",
+    o1: "<script>",
+    o2: "<js>",
+    o3: "<javascript>",
+    o4: "<scripting>",
+    answer: "o1",
+  };
+
+  const q7 = {
+    question: "Which of the following is an advantage of using JavaScript?",
+    o1: "Less server interaction",
+    o2: "Immediate feedback to users",
+    o3: "increased interactivity",
+    o4: "all of the above",
+    answer: "o4",
+  }
+
+  const q8 = {
+    question: "Which of the following type of variables takes precedence over others if names are the same?",
+    o1: "Global variable",
+    o2: "Local variable",
+    o3: "Both of the above",
+    o4: "None of the above",
+    answer: "o2",
+  }
+
+  const q9 = {
+    question: "Which built-in method reverses the order of the elements of an array?",
+    o1: "changeOrder(order)",
+    o2: "reverse()",
+    o3: "sort(order)",
+    o4: "None of the above",
+    answer: "o2",
+  }
+
+
+
+
+
+const q_Bank =[q0, q1, q2, q3, q4, q5, q6, q7, q8, q9]; //array of question objects
 const lastIndex = q_Bank.length - 1;
 
 // END OF QUESTION + ANSWER OBJECT CONSTANTS //
