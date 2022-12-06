@@ -31,6 +31,19 @@ body{
     min-height: 100%;
 }
 
+h1{
+    font-size: 32px;
+}
+
+h2{
+    font-size: 24px;
+}
+
+h3{
+    font-size: 20.8px;
+
+}
+
 /* hovering over both internal and external links turns text light blue */
 a:hover, #view-scores:hover{
     color: lightblue;
@@ -76,7 +89,7 @@ ul > li:nth-of-type(even) {
 }
 
 /* displays "correct" or "incorrect" */
-#answer{
+#answer, #high-score-text{
     color: var(--purple1);
     font-size: 35px;
     font-weight: bold;
@@ -85,9 +98,16 @@ ul > li:nth-of-type(even) {
     font-family: 'Lucida Handwriting', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#intro{
+#intro, .quizComplete-display{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: lavender;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 20px;
+    border: 7px solid var(--purple1);
+    border-radius: 7px;
+    text-align: center;
+
 }
 
 /* Centering content */
@@ -95,7 +115,8 @@ ul > li:nth-of-type(even) {
     margin: auto;
     width: 100%;
     text-align: center;
-  }
+}
+
 
 /* for the view score and timer on top */
 .pseudo-navbar, #foot{

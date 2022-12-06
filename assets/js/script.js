@@ -69,7 +69,7 @@ var questionIndex = 0; //index of the current question, globally scoped for easy
 var curQuestion = "";
 
 // JQUERY VARIABLES //
-var introEls = $("#intro").children(); //Elements displayed before the quiz starts
+var introEls = $("#intro"); //Elements displayed before the quiz starts
 var startButton = $("#start-button"); //Button to start the quiz
 var timerEl = $("#timer"); //timer display
 var questionForm = $("#question-form"); //form that holds all of the elements for the questions to be displayed
