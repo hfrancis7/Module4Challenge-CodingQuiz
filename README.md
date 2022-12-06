@@ -14,7 +14,22 @@ Clicking on the "View Scores" link will display all of the previous scores and i
 https://hfrancis7.github.io/Module4Challenge-CodingQuiz/
 
 ## Screenshots
-TBA
+Welcome to My Quiz Page:<br>
+![Alt text](./assets/images/screenshots/welcome.jpg "Welcome To my Quiz Page") <br>
+
+Example Question Page: <br>
+![Alt text](./assets/images/screenshots/question.jpg "Example quiz question: What does HTML Stand for") <br>
+
+Quiz Complete Page: <br>
+![Alt text](./assets/images/screenshots/complete.jpg "Quiz Complete Page") <br>
+
+High Scores Page: <br>
+![Alt text](./assets/images/screenshots/highScore.jpg "List Of High Scores Page") <br>
+
+
+## Known Issues
+- The cat currently just floats below the main body text rather than sticking to the footer. At some screen sizes, it does sink behing the footer, although this is not intentional. Since this wasn't a project requirement and did not pose an issue to its functionality, it has been as is for now.
+- The way that local storage is being used requires for the rest of local storage to be empty for the high scores to display properly. This doesn't seem to be anything that breaks the code, and local storage can be cleared with the "Clear Storage" button, but nontheless all elements in local storage are displayed in the high scores list when clicking "view scores"
 
 ## User Story
 ```
