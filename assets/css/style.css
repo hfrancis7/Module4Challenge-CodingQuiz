@@ -75,6 +75,21 @@ ul > li:nth-of-type(even) {
     
 }
 
+/* displays "correct" or "incorrect" */
+#answer{
+    color: var(--purple1);
+    font-size: 35px;
+    font-weight: bold;
+    font-style:italic;
+    text-shadow: 2px 2px lightgray;
+    font-family: 'Lucida Handwriting', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#intro{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: lavender;
+}
+
 /* Centering content */
 .center-container {
     margin: auto;
@@ -155,9 +170,13 @@ ul > li:nth-of-type(even) {
 }
 
 
-@media screen and (max-width: 650px){
-    *, .button{
+@media screen and (max-width: 750px){
+    *, .button, a, #foot, #view-scores{
         font-size: 15px;
+    }
+
+    #view-scores{
+
     }
 
     .cat{
