@@ -57,6 +57,12 @@ ul{
     border-radius: 7px;
 }
 
+li{
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'Times New Roman', Times, serif;
+}
+
 /* making every odd color lavender */
 ul > li:nth-of-type(odd) {
     background-color: var(--lavender);
@@ -193,7 +199,7 @@ ul > li:nth-of-type(even) {
     flex-direction: column;
 }
 
-
+/* for smaller screens, very general */
 @media screen and (max-width: 750px){
     *, .button, a, #foot, #view-scores{
         font-size: 15px;
@@ -219,7 +225,7 @@ ul > li:nth-of-type(even) {
     
 
     .cat{
-        max-width: 200px;
+        max-width: 300px;
     }
 }
     
